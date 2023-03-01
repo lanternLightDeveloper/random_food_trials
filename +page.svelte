@@ -12,6 +12,19 @@
 	}
 </script>
 
+<!--
+	goals- 
+	all of these things are a layer deeper if the fetch returns a compilation breaking the page. 
+	Working on understanding flatmap()
+	1.set up a flat map to find how many contributors exist
+	2.set up yields to check if compilation or recipe
+	3.set up nutritional facts to check if compilation or recipe
+	4.set up instructions facts to check if compilation or recipe
+	5.set up contributors to check if compilation or recipe
+
+	extra credit: add a random drink suggester
+-->
+
 <body>
 	<!--Entry phrase: contains recipe info, description and amount of servings-->
 	<hgroup>
@@ -27,7 +40,7 @@
 
 
 
-	serving/nutritional facts varies on compilation
+	serving/nutritional facts varies on compilation or solo
 
 	<p>
 		Calories: {posts.results[0].nutrition.calories} <br />
@@ -37,18 +50,14 @@
 		Protein: {posts.results[0].nutrition.protein} <br />
 		Sugar: {posts.results[0].nutrition.sugar}
 	</p>
-
 	-->
 
 	<!-- video. can it be loaded on the page? 
 
 	<p><a href={posts.results[0].video_url}>{posts.results[0].video_url}</a></p>
-	
 	-->
 
-	<!---->
-
-	<!--indi  Instructions. this works. But if it is a compilation the page breaks
+	<!--solo  Instructions. this works. Kind of. The amount of instruction varies. And if it is a compilation return then the page breaks
 	<p>{posts.results[0].instructions[0].display_text}</p>
 	<p>{posts.results[0].instructions[1].display_text}</p>
 	<p>{posts.results[0].instructions[2].display_text}</p>
@@ -64,7 +73,7 @@
 	<p>{posts.results[0].instructions[12].display_text}</p>
 --->
 
-	<!--compilation breakdown. Some recipes will come back as a compilation. This add the instructions to be one layer deeper than the solo recipes.
+	<!--compilation breakdown. Some recipes will come back as a compilation. This makes the instructions to be one layer deeper than the solo recipes. This breaks the page
 	<p>Recipe # 1</p>
 
 	<p>{posts.results[0].recipes[0].name}</p>
@@ -112,7 +121,7 @@
 -->
 
 	<!--
-	credits
+	credits some compilation
 	<p>
 		{posts.results[0].credits[0].name}, {posts.results[0].credits[1].name}, {posts.results[0]
 			.credits[2].name}
@@ -131,11 +140,12 @@
 
 	body {
 		background-size: 100%;
-		background-color: #000;
-		color: #fff;
+		background-color: #0a0214;
+		color: #fdfdf8;
 		letter-spacing: 2px;
 		line-height: 1.5;
 		margin: -8px;
+		font-family: Arial, Helvetica, sans-serif;
 	}
 
 	h1,
