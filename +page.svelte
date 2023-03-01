@@ -5,21 +5,147 @@
 
 	const { posts } = data;
 
-	console.log(data);
-	console.log(posts);
+	$: console.log(posts);
 
 	function formatDate(date: Date) {
 		return new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(date);
 	}
 </script>
 
-<h1>Hello friend {posts} {data}</h1>
+<body>
+	<!--Entry phrase: contains recipe info, description and amount of servings-->
+	<hgroup>
+		<h1>Today is {formatDate(posts.results[0].createdAt)}.</h1>
+		<h2>Here is a random recipe to try:</h2>
+		<h3>{posts.results[0].name}</h3>
+		<p>{posts.results[0].description}</p>
+	</hgroup>
 
-<hgroup>
-	<h1>{data.posts.title}</h1>
-	<h2>{formatDate(data.posts.createdAt)}</h2>
-</hgroup>
+	<!--yields can vary between recipe or compilation. needs some love 
 
-<div class="content">
-	{@html data.posts.content}
-</div>
+	<p>{posts.results[0].yields}</p>
+
+
+
+	serving/nutritional facts varies on compilation
+
+	<p>
+		Calories: {posts.results[0].nutrition.calories} <br />
+		Carbohydrates: {posts.results[0].nutrition.carbohydrates} <br />
+		Fat: {posts.results[0].nutrition.fat} <br />
+		Fiber: {posts.results[0].nutrition.fiber} <br />
+		Protein: {posts.results[0].nutrition.protein} <br />
+		Sugar: {posts.results[0].nutrition.sugar}
+	</p>
+
+	-->
+
+	<!-- video. can it be loaded on the page? 
+
+	<p><a href={posts.results[0].video_url}>{posts.results[0].video_url}</a></p>
+	
+	-->
+
+	<!---->
+
+	<!--indi  Instructions. this works. But if it is a compilation the page breaks
+	<p>{posts.results[0].instructions[0].display_text}</p>
+	<p>{posts.results[0].instructions[1].display_text}</p>
+	<p>{posts.results[0].instructions[2].display_text}</p>
+	<p>{posts.results[0].instructions[3].display_text}</p>
+	<p>{posts.results[0].instructions[4].display_text}</p>
+	<p>{posts.results[0].instructions[5].display_text}</p>
+	<p>{posts.results[0].instructions[6].display_text}</p>
+	<p>{posts.results[0].instructions[7].display_text}</p>
+	<p>{posts.results[0].instructions[8].display_text}</p>
+	<p>{posts.results[0].instructions[9].display_text}</p>
+	<p>{posts.results[0].instructions[10].display_text}</p>
+	<p>{posts.results[0].instructions[11].display_text}</p>
+	<p>{posts.results[0].instructions[12].display_text}</p>
+--->
+
+	<!--compilation breakdown. Some recipes will come back as a compilation. This add the instructions to be one layer deeper than the solo recipes.
+	<p>Recipe # 1</p>
+
+	<p>{posts.results[0].recipes[0].name}</p>
+	<p>{posts.results[0].recipes[0].yields}</p>
+	<p>{posts.results[0].recipes[0].instructions[0].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[1].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[2].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[3].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[4].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[5].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[6].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[7].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[8].display_text}</p>
+	<p>{posts.results[0].recipes[0].instructions[9].display_text}</p>
+
+	<p>Recipe # 2</p>
+
+	<p>{posts.results[0].recipes[1].name}</p>
+	<p>{posts.results[0].recipes[1].yields}</p>
+	<p>{posts.results[0].recipes[1].instructions[0].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[1].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[2].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[3].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[4].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[5].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[6].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[7].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[8].display_text}</p>
+	<p>{posts.results[0].recipes[1].instructions[9].display_text}</p>
+
+	<p>Recipe # 3</p>
+
+	<p>{posts.results[0].recipes[2].name}</p>
+	<p>{posts.results[0].recipes[2].yields}</p>
+	<p>{posts.results[0].recipes[2].instructions[0].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[1].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[2].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[3].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[4].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[5].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[6].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[7].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[8].display_text}</p>
+	<p>{posts.results[0].recipes[2].instructions[9].display_text}</p>
+-->
+
+	<!--
+	credits
+	<p>
+		{posts.results[0].credits[0].name}, {posts.results[0].credits[1].name}, {posts.results[0]
+			.credits[2].name}
+	</p>-->
+</body>
+
+<!--edge cases
+
+-->
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
+	}
+
+	body {
+		background-size: 100%;
+		background-color: #000;
+		color: #fff;
+		letter-spacing: 2px;
+		line-height: 1.5;
+		margin: -8px;
+	}
+
+	h1,
+	h2,
+	h3,
+	p {
+		margin: 5% 25%;
+	}
+
+	p {
+		font-size: 1.1rem;
+	}
+</style>

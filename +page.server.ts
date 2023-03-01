@@ -1,4 +1,3 @@
-/* DRINKS_API_KEY*/
 import {
     API_KEY,
 } from "$env/static/private";
@@ -27,15 +26,9 @@ export const load: PageServerLoad = async ({
 };
 
 
-
-/* */
 /*  posts: get_random_drink() */
-/*  
-posts: get_posts()*/
-/*  
 
-  /* 
-
+  /*
     const get_random_drink = async () => {
 
         const dri = await fetch(`https://the-cocktail-db.p.rapidapi.com/random.php`, {
@@ -45,6 +38,5 @@ posts: get_posts()*/
             },
         });
  
-
 const get_posts = async () => {
         const res = await fetch(`https://dummyjson.com/products/1`);*/
