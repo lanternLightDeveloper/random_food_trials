@@ -10,6 +10,22 @@
 	function formatDate(date: Date) {
 		return new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(date);
 	}
+
+	function getInstructions() {
+		if (!posts.results || posts.results.length === 0) {
+			return [];
+		}
+
+		const instructions = posts.results.flatMap((post) => post.instructions);
+
+		return instructions.filter((instruction) => instruction.display_text);
+	}
+
+	/*flatmap function
+
+		
+	
+*/
 </script>
 
 <!--
@@ -19,7 +35,7 @@
 	1.set up a flat map to find how many contributors exist
 	2.set up yields to check if compilation or recipe
 	3.set up nutritional facts to check if compilation or recipe
-	4.set up instructions facts to check if compilation or recipe
+	4.set up instructions to check if compilation or recipe
 	5.set up contributors to check if compilation or recipe
 
 	extra credit: add a random drink suggester
@@ -34,7 +50,8 @@
 		<p>{posts.results[0].description}</p>
 	</hgroup>
 
-	<!--yields can vary between recipe or compilation. needs some love 
+	<!--
+	yields can vary between recipe or compilation. needs some love 
 
 	<p>{posts.results[0].yields}</p>
 
@@ -56,21 +73,19 @@
 
 	<p><a href={posts.results[0].video_url}>{posts.results[0].video_url}</a></p>
 	-->
+	<!--solo  Instructions. this works. Kind of.  if it is a compilation return then the page breaks
+	{#if posts.results}
+		<ul>
+			{#each getInstructions() as instruction}
+				<li>{instruction.display_text}</li>
+			{/each}
+		</ul>
+	{:else}
+		<p>No posts found</p>
+	{/if}
 
-	<!--solo  Instructions. this works. Kind of. The amount of instruction varies. And if it is a compilation return then the page breaks
-	<p>{posts.results[0].instructions[0].display_text}</p>
-	<p>{posts.results[0].instructions[1].display_text}</p>
-	<p>{posts.results[0].instructions[2].display_text}</p>
-	<p>{posts.results[0].instructions[3].display_text}</p>
-	<p>{posts.results[0].instructions[4].display_text}</p>
-	<p>{posts.results[0].instructions[5].display_text}</p>
-	<p>{posts.results[0].instructions[6].display_text}</p>
-	<p>{posts.results[0].instructions[7].display_text}</p>
-	<p>{posts.results[0].instructions[8].display_text}</p>
-	<p>{posts.results[0].instructions[9].display_text}</p>
-	<p>{posts.results[0].instructions[10].display_text}</p>
-	<p>{posts.results[0].instructions[11].display_text}</p>
-	<p>{posts.results[0].instructions[12].display_text}</p>
+
+	
 --->
 
 	<!--compilation breakdown. Some recipes will come back as a compilation. This makes the instructions to be one layer deeper than the solo recipes. This breaks the page
@@ -151,7 +166,8 @@
 	h1,
 	h2,
 	h3,
-	p {
+	p,
+	li {
 		margin: 5% 25%;
 	}
 
