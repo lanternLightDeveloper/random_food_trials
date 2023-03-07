@@ -15,48 +15,86 @@
 		if (!posts.results || posts.results.length === 0) {
 			return [];
 		}
-
 		const instructions = posts.results.flatMap((post) => post.instructions);
-
 		return instructions.filter((instruction) => instruction.display_text);
 	}
 
 	/*flatmap function
-
-		
-	
-*/
+	Do multiple functions live in one flatMap()?
+	*/
 </script>
 
 <!--
 	goals- 
 	all of these things are a layer deeper if the fetch returns a compilation breaking the page. 
 	Working on understanding flatmap()
+	MAIN***.set up instructions 
 	1.set up a flat map to find how many contributors exist
-	2.set up yields to check if compilation or recipe
-	3.set up nutritional facts to check if compilation or recipe
-	4.set up instructions to check if compilation or recipe
-	5.set up contributors to check if compilation or recipe
+	2.set up yields 
+	3.set up nutritional facts 
+	4.set up contributors 
 
 	extra credit: add a random drink suggester
 -->
 
 <body>
-	<!--Entry phrase: contains recipe info, description and amount of servings-->
 	<hgroup>
+		<!--Entry phrase: contains recipe info, description and amount of servings-->
+
 		<h1>Today is {formatDate(posts.results[0].createdAt)}.</h1>
 		<h2>Here is a random recipe to try:</h2>
 		<h3>{posts.results[0].name}</h3>
 		<p>{posts.results[0].description}</p>
 	</hgroup>
 
-	<!--
-	yields can vary between recipe or compilation. needs some love 
+	<!--this shows a compilation but not a solo recipe-->
+
+	{#if posts.results && posts.results.length > 0}
+		{#each posts.results as post}
+			{#if post.recipes && post.recipes.length > 0}
+				{#each post.recipes as recipe}
+					{#if recipe.instructions && recipe.instructions.length > 0}
+						<h2>{recipe.name}</h2>
+						<ul>
+							{#each recipe.instructions as instruction}
+								{#if instruction.display_text}
+									<li>{instruction.display_text}</li>
+								{/if}
+							{/each}
+						</ul>
+					{/if}
+				{/each}
+			{/if}
+		{/each}
+	{:else}
+		<p>No data available</p>
+	{/if}
+	<!--compilation breakdown. Some recipes will come back as a compilation. 
+		This makes the instructions to be one layer deeper than the solo recipes. 
+		They work by themselves but not together.
+		The comp code wont break if its a solo recipe. but the solo recipe code does break if its a compilation.
+
+	*******
+	solo break down. They work by themselves but not together
+
+
+	{#if posts.results}
+		<ul>
+			{#each getInstructions() as instruction}
+				<li>{instruction.display_text}</li>
+			{/each}
+		</ul>
+	{:else}
+		<p>No posts found</p>
+	{/if}
+-->
+
+	<!--yields can vary between recipe or compilation. needs some love
 
 	<p>{posts.results[0].yields}</p>
+	
 
-
-
+	*****
 	serving/nutritional facts varies on compilation or solo
 
 	<p>
@@ -67,85 +105,24 @@
 		Protein: {posts.results[0].nutrition.protein} <br />
 		Sugar: {posts.results[0].nutrition.sugar}
 	</p>
-	-->
 
-	<!-- video. can it be loaded on the page? 
+
+	*****
+	video. can it be loaded on the page? 
 
 	<p><a href={posts.results[0].video_url}>{posts.results[0].video_url}</a></p>
-	-->
-	<!--solo  Instructions. this works. Kind of.  if it is a compilation return then the page breaks
-	{#if posts.results}
-		<ul>
-			{#each getInstructions() as instruction}
-				<li>{instruction.display_text}</li>
-			{/each}
-		</ul>
-	{:else}
-		<p>No posts found</p>
-	{/if}
 
 
-	
---->
-
-	<!--compilation breakdown. Some recipes will come back as a compilation. This makes the instructions to be one layer deeper than the solo recipes. This breaks the page
-	<p>Recipe # 1</p>
-
-	<p>{posts.results[0].recipes[0].name}</p>
-	<p>{posts.results[0].recipes[0].yields}</p>
-	<p>{posts.results[0].recipes[0].instructions[0].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[1].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[2].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[3].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[4].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[5].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[6].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[7].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[8].display_text}</p>
-	<p>{posts.results[0].recipes[0].instructions[9].display_text}</p>
-
-	<p>Recipe # 2</p>
-
-	<p>{posts.results[0].recipes[1].name}</p>
-	<p>{posts.results[0].recipes[1].yields}</p>
-	<p>{posts.results[0].recipes[1].instructions[0].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[1].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[2].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[3].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[4].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[5].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[6].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[7].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[8].display_text}</p>
-	<p>{posts.results[0].recipes[1].instructions[9].display_text}</p>
-
-	<p>Recipe # 3</p>
-
-	<p>{posts.results[0].recipes[2].name}</p>
-	<p>{posts.results[0].recipes[2].yields}</p>
-	<p>{posts.results[0].recipes[2].instructions[0].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[1].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[2].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[3].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[4].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[5].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[6].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[7].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[8].display_text}</p>
-	<p>{posts.results[0].recipes[2].instructions[9].display_text}</p>
--->
-
-	<!--
-	credits some compilation
+	*****
+	credits compilation
 	<p>
 		{posts.results[0].credits[0].name}, {posts.results[0].credits[1].name}, {posts.results[0]
 			.credits[2].name}
-	</p>-->
+	</p>
+	-->
 </body>
 
-<!--edge cases
-
--->
+<!--edge cases-->
 <style>
 	* {
 		margin: 0;
