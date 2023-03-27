@@ -1,74 +1,14 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
 	export let data: PageData;
 
 	const { posts } = data;
-
-	$: console.log(posts);
 
 	function formatDate(date: Date) {
 		return new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(date);
 	}
 
-	function getInstructions() {
-		if (!posts.results || posts.results.length === 0) {
-			return [];
-		}
-
-		const instructions = [];
-
-		posts.results.forEach((result) => {
-			if (result.recipes && result.recipes.length > 0) {
-				result.recipes.forEach((recipe) => {
-					const recipeTitle = recipe.name;
-					const recipeInstructions = recipe.instructions || [];
-					instructions.push({ title: recipeTitle, instructions: recipeInstructions });
-				});
-			} else if (result.sections && result.sections.length > 0) {
-				const recipeTitle = result.name;
-				const recipeInstructions = result.sections
-					.flatMap((section) => section.components)
-					.filter((component) => component.display_text);
-				instructions.push({ title: recipeTitle, instructions: recipeInstructions });
-			}
-		});
-
-		return instructions;
-	}
-
-	function getComponents() {
-		if (!posts.results || posts.results.length === 0) {
-			return [];
-		}
-
-		// flatten the components arrays for single recipes
-		const singleComponents = posts.results.flatMap((post) => {
-			if (post.components && post.components.length > 0) {
-				return post.components;
-			} else if (post.recipes && post.recipes.length > 0) {
-				return post.recipes.flatMap((recipe) => recipe.components || []);
-			} else {
-				return [];
-			}
-		});
-
-		// flatten the components arrays for compilation groups
-		const compilationComponents = posts.results.flatMap((post) => {
-			if (post.compilations && post.compilations.length > 0) {
-				return post.compilations.flatMap((compilation) => {
-					return compilation.components || [];
-				});
-			} else {
-				return [];
-			}
-		});
-
-		// combine the flattened arrays
-		return [...singleComponents, ...compilationComponents].filter(
-			(component) => component.raw_text
-		);
-	}
+	$: console.log(posts);
 </script>
 
 <body>
@@ -116,21 +56,31 @@
 		<p>No data available</p>
 	{/if}
 
-	<h2>Instructions</h2>
+	<h2>instructions</h2>
 
 	{#if posts.results && posts.results.length > 0}
 		<ul>
-			{#each getInstructions() as { title, instructions }}
-				<li>
-					<details>
-						<summary><strong>{title}</strong></summary>
-						<ul>
-							{#each instructions as instruction}
-								<li>{instruction.display_text}</li>
-							{/each}
-						</ul>
-					</details>
-				</li>
+			{#each posts.results as result}
+				{#if result.recipes && result.recipes.length > 0}
+					{#each result.recipes as recipe}
+						<li>
+							<details>
+								<summary>{recipe.name}</summary>
+								{#each recipe.instructions as instruction}
+									<p>{instruction.display_text}</p>
+								{/each}
+							</details>
+						</li>
+					{/each}
+				{:else if result.instructions && result.instructions.length > 0}
+					<ul>
+						{#each result.instructions as instruction}
+							<li>{instruction.display_text}</li>
+						{/each}
+					</ul>
+				{:else}
+					<p>No instructions available</p>
+				{/if}
 			{/each}
 		</ul>
 	{:else}
@@ -146,7 +96,7 @@
 	}
 
 	body {
-		background-size: 100%;
+		height: 300vh;
 		background-color: #0a0214;
 		color: #fdfdf8;
 		letter-spacing: 2px;
