@@ -66,9 +66,11 @@
 						<li>
 							<details>
 								<summary>{recipe.name}</summary>
-								{#each recipe.instructions as instruction}
-									<p>{instruction.display_text}</p>
-								{/each}
+								<ul class="highlight">
+									{#each recipe.instructions as instruction}
+										<li>{instruction.display_text}</li>
+									{/each}
+								</ul>
 							</details>
 						</li>
 					{/each}
