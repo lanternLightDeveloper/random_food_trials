@@ -12,16 +12,16 @@
 </script>
 
 <body>
-	<hgroup>
-		<!--Entry phrase: contains recipe info, description and amount of servings-->
+	<!--Entry phrase: contains recipe info, description and amount of servings-->
 
-		<h1>Today is {formatDate(posts.results[0].createdAt)}</h1>
-		<h2>Here is a random recipe to try:</h2>
-		<h3>{posts.results[0].name}</h3>
-		<h4>{posts.results[0].description}</h4>
-	</hgroup>
+	<h1>Today is {formatDate(posts.results[0].createdAt)}</h1>
+	<h2>Here is a random recipe to try:</h2>
+	<h3>{posts.results[0].name}</h3>
+	<p>{posts.results[0].description}</p>
 
-	<h2>Ingredients</h2>
+	<br />
+
+	<h2>Ingredients:</h2>
 
 	{#if posts.results && posts.results.length > 0}
 		<ul>
@@ -56,7 +56,7 @@
 		<p>No data available</p>
 	{/if}
 
-	<h2>instructions</h2>
+	<h2>Instructions:</h2>
 
 	{#if posts.results && posts.results.length > 0}
 		<ul>
@@ -88,6 +88,8 @@
 	{:else}
 		<p>No data available</p>
 	{/if}
+
+	<br />
 </body>
 
 <style lang="scss">
@@ -98,7 +100,7 @@
 	}
 
 	body {
-		height: 300vh;
+		height: fit-content;
 		background-color: #0a0214;
 		color: #fdfdf8;
 		letter-spacing: 2px;
@@ -111,9 +113,25 @@
 	h2,
 	h3,
 	h4,
-	p,
+	p {
+		margin: 5% 10%;
+	}
+
 	li {
-		margin: 1% 20%;
+		margin: 3% 10%;
+	}
+
+	h1 {
+		font-size: 1.1rem;
+	}
+
+	h2 {
+		font-size: 1rem;
+	}
+
+	h3,
+	h4 {
+		font-size: 0.9rem;
 	}
 
 	ul {
@@ -123,9 +141,41 @@
 	}
 	.highlight {
 		background-color: #201131;
+		li {
+			list-style-type: disc;
+		}
 	}
 
-	p {
-		font-size: 1.1rem;
+	p,
+	li {
+		font-size: 0.8rem;
+	}
+
+	@media (min-width: 780px) {
+		h1,
+		h2,
+		h3,
+		h4,
+		p {
+			margin: 5% 20%;
+		}
+
+		li {
+			margin: 2% 20%;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		h1,
+		h2,
+		h3,
+		h4,
+		p {
+			margin: 3% 25%;
+		}
+
+		li {
+			margin: 2% 25%;
+		}
 	}
 </style>
