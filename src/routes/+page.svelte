@@ -121,6 +121,8 @@
 		<p>No data available</p>
 	{/if}
 
+	<button onclick="location.reload()">Next recipe</button>
+
 	<br /><br /><br />
 
 	<h4>
@@ -154,7 +156,8 @@
 	h2,
 	h3,
 	h4,
-	p {
+	p,
+	button {
 		margin: 5% 10%;
 	}
 
@@ -190,6 +193,19 @@
 		text-decoration: none;
 	}
 
+	button {
+		background: rgba(151, 153, 7, 0.616);
+		transition: all 0.2s ease-in-out;
+		width: fit-content;
+		border-radius: 3px;
+		text-transform: uppercase;
+		padding: 0.5rem;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
 	.highlight {
 		background-color: hsl(268, 48%, 13%);
 	}
@@ -213,7 +229,8 @@
 		h2,
 		h3,
 		h4,
-		p {
+		p,
+		button {
 			margin: 5% 20%;
 		}
 
@@ -228,7 +245,8 @@
 		h3,
 		h4,
 		p,
-		li {
+		li,
+		button {
 			margin: 2% 25%;
 		}
 
