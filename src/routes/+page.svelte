@@ -17,8 +17,10 @@
 	<h1>Today is {formatDate(posts.results[0].createdAt)}</h1>
 	<h2>Here is a random recipe to try:</h2>
 	<h3>{posts.results[0].name}</h3>
-	<p>{posts.results[0].description}</p>
 
+	{#if posts.results[0].description}
+		<p>{posts.results[0].description}</p>
+	{/if}
 	<br />
 
 	<h2>Ingredients:</h2>
@@ -32,6 +34,9 @@
 							<details>
 								<summary>{recipe.name}</summary>
 								{#each recipe.sections as section}
+									{#if section.name}
+										<p>{section.name}</p>
+									{/if}
 									<ul class="highlight">
 										{#each section.components as component}
 											<li>{component.raw_text}</li>
@@ -44,6 +49,9 @@
 				{:else}
 					{#each result.sections as section}
 						<ul>
+							{#if section.name}
+								<p>{section.name}</p>
+							{/if}
 							{#each section.components as component}
 								<li>{component.raw_text}</li>
 							{/each}
@@ -67,19 +75,43 @@
 							<details>
 								<summary>{recipe.name}</summary>
 								<ul class="highlight">
+									<p>Yield: {recipe.yields}</p>
+									<p>
+										Calories: {recipe.nutrition.calories} <br />
+										Carbohydrates: {recipe.nutrition.carbohydrates} <br />
+										Fat: {recipe.nutrition.fat} <br />
+										Fiber: {recipe.nutrition.fiber} <br />
+										Protein: {recipe.nutrition.protein} <br />
+										Sugar: {recipe.nutrition.sugar}
+									</p>
 									{#each recipe.instructions as instruction}
 										<li>{instruction.display_text}</li>
 									{/each}
 								</ul>
+								<p>
+									Credits: {#each recipe.credits as credit}{credit.name} {/each}
+								</p>
 							</details>
 						</li>
 					{/each}
 				{:else if result.instructions && result.instructions.length > 0}
+					<p>Yield: {result.yields}</p>
+					<p>
+						Calories: {result.nutrition.calories} <br />
+						Carbohydrates: {result.nutrition.carbohydrates} <br />
+						Fat: {result.nutrition.fat} <br />
+						Fiber: {result.nutrition.fiber} <br />
+						Protein: {result.nutrition.protein} <br />
+						Sugar: {result.nutrition.sugar}
+					</p>
 					<ul>
 						{#each result.instructions as instruction}
 							<li>{instruction.display_text}</li>
 						{/each}
 					</ul>
+					<p>
+						Credits: {#each result.credits as credit}{credit.name} {/each}
+					</p>
 				{:else}
 					<p>No instructions available</p>
 				{/if}
@@ -112,7 +144,6 @@
 	h1,
 	h2,
 	h3,
-	h4,
 	p {
 		margin: 5% 10%;
 	}
