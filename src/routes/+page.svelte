@@ -19,7 +19,7 @@
 	<h3>{posts.results[0].name}</h3>
 
 	{#if posts.results[0].description}
-		<p>{posts.results[0].description}</p>
+		<p>{posts.results[0].description.replace(/<\/?a[^>]*>/g, '')}</p>
 	{/if}
 	<br />
 
@@ -34,10 +34,10 @@
 							<details>
 								<summary>{recipe.name}</summary>
 								{#each recipe.sections as section}
-									{#if section.name}
-										<p>{section.name}</p>
-									{/if}
 									<ul class="highlight">
+										{#if section.name}
+											<li class="highlight_o">{section.name}</li>
+										{/if}
 										{#each section.components as component}
 											<li>{component.raw_text}</li>
 										{/each}
@@ -50,7 +50,7 @@
 					{#each result.sections as section}
 						<ul>
 							{#if section.name}
-								<p>{section.name}</p>
+								<li class="highlight_o">{section.name}</li>
 							{/if}
 							{#each section.components as component}
 								<li>{component.raw_text}</li>
@@ -75,8 +75,8 @@
 							<details>
 								<summary>{recipe.name}</summary>
 								<ul class="highlight">
-									<p>Yield: {recipe.yields}</p>
-									<p>
+									<p class="highlight_o">Yield: {recipe.yields}</p>
+									<p class="highlight_2">
 										Calories: {recipe.nutrition.calories} <br />
 										Carbohydrates: {recipe.nutrition.carbohydrates} <br />
 										Fat: {recipe.nutrition.fat} <br />
@@ -96,7 +96,7 @@
 					{/each}
 				{:else if result.instructions && result.instructions.length > 0}
 					<p>Yield: {result.yields}</p>
-					<p>
+					<p class="highlight_2">
 						Calories: {result.nutrition.calories} <br />
 						Carbohydrates: {result.nutrition.carbohydrates} <br />
 						Fat: {result.nutrition.fat} <br />
@@ -121,6 +121,15 @@
 		<p>No data available</p>
 	{/if}
 
+	<br /><br /><br />
+
+	<h4>
+		Information is pulled from the Tasty api. You can find their Youtube channel <a
+			href="https://www.youtube.com/@tastyrecipes/"
+		>
+			here</a
+		>. Thank you for visiting, I hope you have a great day.
+	</h4>
 	<br />
 </body>
 
@@ -133,8 +142,8 @@
 
 	body {
 		height: fit-content;
-		background-color: #0a0214;
-		color: #fdfdf8;
+		background-color: hsl(267, 82%, 4%);
+		color: hsl(60, 100%, 98%);
 		letter-spacing: 2px;
 		line-height: 1.5;
 		margin: -8px;
@@ -160,26 +169,42 @@
 		font-size: 1rem;
 	}
 
-	h3,
-	h4 {
+	h3 {
 		font-size: 0.9rem;
-	}
-
-	ul {
-		&:hover {
-			cursor: pointer;
-		}
-	}
-	.highlight {
-		background-color: #201131;
-		li {
-			list-style-type: disc;
-		}
 	}
 
 	p,
 	li {
 		font-size: 0.8rem;
+	}
+
+	ul {
+		border-radius: 3px;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.highlight {
+		background-color: hsl(268, 48%, 13%);
+	}
+
+	.highlight_o {
+		background-color: hsl(274, 78%, 2%);
+		border-radius: 3px;
+		padding: 0.5rem;
+		width: fit-content;
+	}
+
+	.highlight_2 {
+		background-color: hsl(270, 82%, 4%);
+		border-radius: 3px;
+		padding: 0.5rem;
+		width: fit-content;
 	}
 
 	@media (min-width: 780px) {
@@ -201,12 +226,26 @@
 		h2,
 		h3,
 		h4,
-		p {
-			margin: 3% 25%;
-		}
-
+		p,
 		li {
 			margin: 2% 25%;
+		}
+
+		h1 {
+			font-size: 1.25rem;
+		}
+
+		h2 {
+			font-size: 1.1rem;
+		}
+
+		h3 {
+			font-size: 1rem;
+		}
+
+		p,
+		li {
+			font-size: 0.9rem;
 		}
 	}
 </style>
