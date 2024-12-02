@@ -1,0 +1,48 @@
+:root{
+/* spacing */
+--size-1: 0.25rem ;
+--size-2: 0.5rem ;
+--size-3: 0.75rem ;
+--size-4: 1rem ;
+--size-5: 1.25rem ;
+--size-6: 1.5rem ;
+--size-7: 2rem ;
+--size-8: 3rem;
+--size-9: 5rem;
+--size-10: 7rem;
+
+/* page spacing */
+--space-Top:5% 0;
+--space-Side:0 8%;
+--space-Qtr:5% 8%;
+--space-Half:15% 8%;
+--space-Full: 20% 15%;
+--space-Lg: 20%;
+--space-Auto:15% auto;
+
+/* Edges */
+--rad: 10px;
+--bord: 1px solid var(--highlight);
+--bord-2: 1px solid var(--highlight-2);
+
+/* shadows & lights  
+need to make these shadows better*/
+--text-Shadow:2px 2px 2px var(--error);
+--text-Light:2px 2px 2px var(--extra);
+
+--box-Shadow:  2px 4px 8px var(--back-1);
+--box-Light: 1px 3px 5px var(--extra);
+
+/* opacity */
+--op-L:0.25;
+--op-M:0.5;
+--op-S:0.75;
+
+/* font stack */
+--font-Main: 'Poppins', sans-serif;
+--font-Alt: 'Rubik',sans-serif;
+
+/* Animations */
+--tSpeed: 0.3s;
+--transit:all 0.3s ease-in-out 0.1s;
+}

@@ -1,0 +1,42 @@
+
+
+/* buttons */
+	.ripple-btn {
+		background-color: var(--error);
+		color: var(--text-Color-1);
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		overflow: hidden;
+		cursor: pointer;
+		position: relative;
+
+        &:hover {
+        border: var(--bord);
+        }
+	}
+
+	.ripple-btn::after {
+		content: '';
+		position: absolute;
+		background: var(--highlight-2);
+        color: var(--back-1);
+		border-radius: 50%;
+		width: 100px;
+		height: 100px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0);
+		opacity: 0;
+		transition:
+			transform 0.5s,
+			opacity 0.5s;
+	}
+
+	.ripple-btn:active::after {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 1;
+	}
+
+
+

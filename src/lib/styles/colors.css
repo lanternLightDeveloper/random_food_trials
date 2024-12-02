@@ -1,0 +1,22 @@
+/* colors */
+:root{
+    --text-Color-1:hsl(220, 60%, 99%);
+    --text-Color-2: hsl(228, 56%, 2%);
+    
+    --back-1:hsl(240, 60%, 1%);
+    --back-2:hsl(240, 48%, 6%);
+    --back-3:hsl(272, 87%, 30%);
+
+    --back-Hallow:hsla(272, 87%, 30%, 0.445);
+    --back-Deep-Hallow:hsla(273, 88%, 13%, 0.329);
+
+    --grabber:rgb(28, 118, 197);
+    
+    --highlight:hsl(272, 87%, 42%);
+    --highlight-2:hsl(49, 80%, 46%);
+
+    --error:hsl(304, 87%, 43%);
+    
+    --gradient:linear-gradient(hsl(278, 73%, 3%), hsl(281, 94%, 7%), hsla(273, 88%, 13%));
+    --gradientFlip:linear-gradient(0deg, hsl(278, 73%, 3%), hsl(281, 94%, 7%), hsla(273, 88%, 13%));
+}

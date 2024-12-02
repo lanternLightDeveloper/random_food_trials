@@ -1,0 +1,90 @@
+/* reset styles */
+* {
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-Main);
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+	background: var(--back-1);
+	color: var(--text-Color-1);
+    overflow-x: hidden;
+    letter-spacing: 2px;
+    line-height: 1.5;
+}
+
+.altFont {
+    font-family: var(--font-Alt);
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+        transition:  var(--transit);
+        transform: scale(1.1);
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+.marg_Also {
+    margin: var(--space-Qtr);
+}
+
+h1 {
+    font-size: var(--size-7);
+}
+
+h2 {
+    font-size: var(--size-6);
+}
+
+h3 {
+    font-size: var(--size-5);
+}
+
+p {
+    font-size: var(--size-4);
+}
+
+img {
+    max-width: 100%;
+    border-radius: var(--rad);
+}
+
+ul {
+    list-style-type: none;
+}
+
+    /* Tablet Screen  */
+@media (min-width: 768px) {
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+.marg_Also {
+        margin: var(--space-Full);
+    }
+}
+
+    /* Desktop Screen */
+@media (min-width: 1024px) {
+    h1,
+    h2,
+    h3,
+    p,
+.marg_Also {
+        margin: var(--space-Lg);
+    }
+} 
