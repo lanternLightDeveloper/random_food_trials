@@ -41,7 +41,7 @@
 	let allRecipes: Recipe[] = posts?.results || []
 	let isLoading = false
 	let selectedRecipe: Recipe | null = null
-	let resultsCount = 10 // Default number of results
+	let resultsCount = 100000000 // Default number of results
 
 	async function handleSearch(event: SubmitEvent) {
 		event.preventDefault()
