@@ -143,7 +143,7 @@
 		<option value="10">10</option>
 		<option value="15">15</option>
 		<option value="20">20</option>
-		<option value="40">40</option>
+		<option value="40000000000">40000000000</option>
 	</select>
 	<br />
 	<button class="ripple-btn" type="submit" aria-label="Perform recipe search" disabled={isLoading}>
